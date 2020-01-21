@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gestion du DOM avec jQuery</title>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var $listItems = $("li");
+
+            $listItems.click(function(){
+
+                console.log($(this).css("color"));
+
+                /*
+                if($(this).css("color") == "rgb(255, 0, 0)"){
+                    $(this).css("color", "blue");
+                } else {
+                    $(this).css("color", "red");
+                }
+                */
+                /*
+                var isRed = $(this).css("color") == "rgb(255, 0, 0)";
+                $(this).css("color",isRed? "blue": "red");
+                */
+
+                $(this).toggleClass("red");
+
+                
+            });
+
+            $("#btList").click(function(){
+                $("ul").toggle(1000, function(){
+                    var isHidden = $("ul").css("display") == "none";
+                    $("#btList").text(isHidden? "Afficher la liste": "Masquer la liste");
+                });
+                
+            });
+
+
+            console.log(
+                $("ol").children()
+            );
+            
+            
+        });
+    </script>
+
+    <style>
+        li {
+            color: blue;
+        }
+
+        .red {
+            color: red;
+        }
+    
+    </style>
+
+</head>
+<body>
+
+    <h1>La gestion du DOM avec jQuery</h1>
+
+    <h2>A quoi sert jQuery</h2>
+    <button id="btList">Masquer la liste</button>
+    <ul>
+        <li>Facilite la gestion du DOM</li>
+        <li>
+            Permet de faire des animations
+            <ol>
+                <li>translation</li>
+                <li>opacité</li>
+            </ol>
+
+        </li>
+        <li>Permet de faire de requêtes AJAX</li>
+        <li>fournit des plugins</li>
+    </ul>
+    
+</body>
+</html>

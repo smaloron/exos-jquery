@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Formulaire dynamique</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        /********************************
+        * Fonction d'ajout d'un téléphone dans le formulaire
+        *********************************/
+        function addTel($container){
+            //Création du li
+            var $item = $("<li class=\"form-group mt-2 row\"></li>");
+            //Création de l'input
+            var $input = $("<input>").attr({
+                "type": "tel",
+                "name": "telephones[]",
+                "class": "form-control"
+            });
+
+            //création d'un conteneur pour l'input
+            var $inputContainer = $("<div class=\"col-8\"></div>");
+            //ajout de l'input au container
+            $inputContainer.append($input);
+
+            //Création du bouton
+            var $button = $("<button></button>").attr({
+                "type": "button",
+                "class": "btn btn-danger delete"
+            }).text("suppr");
+            var $buttonContainer = $("<div class=\"col-3\"></div>");
+            $buttonContainer.append($button);
+
+            //ajout de l'input au li
+            $item.append($inputContainer);
+            //ajout du bouton au li
+            $item.append($buttonContainer);
+
+            //ajout du li au container
+            $container.append($item);
+        }
+
+        $(document).ready(function(){
+            var $telContainer = $("#telGroup");
+            var $btAddTel = $("#btAddTel");
+
+            $btAddTel.click(function(){
+                addTel($telContainer);
+            });
+        });
+    
+    </script>
+</head>
+<body class="container-fluid">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 p-3">
+            <h1>Formulaire</h1>
+
+            <form method="POST">
+                <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" name="personName" class="form-control">
+                </div>
+                <div class="row">
+                    <h3 class="col-md-7">Téléphones</h3>
+                    <button type="button" class="btn btn-primary col-md-5" id="btAddTel">
+                        Ajouter un téléphone
+                    </button>
+
+                </div>
+
+                <ul class="list-group" id="telGroup">
+
+                </ul>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Paragraphes</title>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function(){
+            var $titles = $("p").prev();
+
+            $titles
+                .css("cursor", "pointer")
+                .click(function(){
+                    $(this).next().toggle();
+            });
+
+
+/*****************************************************
+* Gestion d'une liste de fruits
+*****************************************************/
+
+            // Cibles de l'application
+
+            //Le formulaire
+            var $form = $("form");
+            //Le champ de saisie
+            var $input = $("#inputFruit");
+            //La liste
+            var $list = $("#fruitList");
+
+            // Evénement déclenché par l'envoi du formulaire
+            $form.submit(function(event){
+                //Empêche l'envoi du formulaire et donc le rechargement de la page
+                event.preventDefault();
+
+                //Récupération de la saisie
+                var newFruit = $input.val().trim();
+
+                //Si la saisie n'est pas vide
+                if(newFruit != ""){
+                    //Création du nouve élément avec le text que l'on a saisi
+                    var $item = $("<li></li>").text(newFruit);
+                    //Ajout du bouton supprimer au nouve élément
+                    $item.append($("<button class=\"delete\">supprimer</button>"));
+                    //Ajout du nouve élément à la liste
+                    $list.append($item); 
+                    //Remise à zéro du champ de saisie
+                    $input.val("");
+                }
+            });
+
+            //Evénement déclenché par le clic sur un bouton supprimer
+            //délégation car les boutons n'existent pas encore
+            $list.delegate(".delete", "click", function(){
+                var $button = $(this);
+                console.log($(this));
+                //Masquage du li
+                $button.parent().hide(500, function(){
+                    console.log($(this));
+                    //suppression du li (le parent du bouton)
+                    $button.parent().remove();
+                });
+                
+            })
+        });
+
+    </script>
+</head>
+
+<body>
+
+    <form method="post">
+        <input type="text" id="inputFruit" placeholder="saisissez un fruit">
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <ul id="fruitList">
+
+    </ul>
+
+    <h1>Premier paragraphe</h1>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque officia placeat, quae ex exercitationem aperiam
+        reiciendis minus quis minima. Tempora corporis repudiandae earum voluptates veritatis nulla dolore totam amet
+        dolor.
+    </p>
+
+    <h2>Deuxième paragraphe</h2>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque officia placeat, quae ex exercitationem aperiam
+        reiciendis minus quis minima. Tempora corporis repudiandae earum voluptates veritatis nulla dolore totam amet
+        dolor.
+    </p>
+
+
+</body>
+
+</html>
