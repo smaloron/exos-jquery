@@ -8,9 +8,21 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script>
+
+
+function add(a,b){
+    return a +b;
+}
+
+var n1 = 1;
+var n2 = 3;
+console.log(add(n1, n2));
+
         /********************************
         * Fonction d'ajout d'un téléphone dans le formulaire
         *********************************/
+
+        /*
         function addTel($container){
             //Création du li
             var $item = $("<li class=\"form-group mt-2 row\"></li>");
@@ -42,23 +54,50 @@
             //ajout du li au container
             $container.append($item);
         }
+        */
+
+        function addTelWithClone($container){
+            $clone = $("#template").clone().removeAttr("id");
+            $container.append($clone);
+        }
 
         $(document).ready(function(){
             var $telContainer = $("#telGroup");
             var $btAddTel = $("#btAddTel");
 
             $btAddTel.click(function(){
-                addTel($telContainer);
+                addTelWithClone($telContainer);
+            });
+
+            $telContainer.delegate(".delete", "click", function(){
+                $(this).parent().parent().remove();
             });
         });
     
     </script>
+
+    <style>
+        #template {
+            display: none;
+        }
+    </style>
 </head>
 <body class="container-fluid">
 
     <div class="row justify-content-center">
         <div class="col-md-6 p-3">
             <h1>Formulaire</h1>
+
+            <li id="template" class="form-group mt-2 row">
+                <div class="col-8">
+                    <input type="text" name="tel[]" class="form-control">
+                </div>
+                <div class="col-4">
+                    <button type="button" class="btn btn-danger delete">
+                        Supprimer
+                    </button>
+                </div>
+            </li>
 
             <form method="POST">
                 <div class="form-group">

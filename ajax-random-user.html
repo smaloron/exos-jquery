@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Utilisateur aléatoire</title>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        
+        $(document).ready(function(){
+            var $infos = $("#infos");
+
+            //Récupération des données d'un utilisateur aléatoire
+            //depuis le serveur randomuser.me
+            const API_URL = "https://randomuser.me/api?gender=female&nat=es";
+
+            var user;
+
+            //appel ajax
+            $.get(API_URL, function(response){
+                user = response.results[0];
+
+                $infos.children()
+                        .first()
+                        .text(user.name.first + " " + user.name.last)
+                        .next()
+                        .text(user.gender);
+            });
+
+            console.log("fin du script");
+
+        });
+    
+    </script>
+</head>
+<body>
+
+    <div id="infos">
+        <h1></h1>
+        <p></p>
+    </div>
+    
+</body>
+</html>

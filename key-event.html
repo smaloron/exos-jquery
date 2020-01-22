@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Evénements clavier</title>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            var $ball = $("#ball");
+
+            $(document).keydown(function(){
+                console.log("touche enfoncée");
+            });
+
+            $(document).keyup(function(event){
+                //Récupération des coordonnées de la boule
+                var top = $ball.css("top").replace("px", "")-0;
+                console.log(top);
+                if(event.key == "ArrowUp"){
+                    $ball.css("top", (top - 5) + "px");
+                } else if (event.key == "ArrowDown"){
+                    $ball.css("top", (top + 5) + "px");
+                }
+            })
+        });
+    </script>
+
+    <style>
+        #ball {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: red;
+            position:absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="ball"></div>
+    
+</body>
+</html>
