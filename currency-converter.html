@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Conversion de devises</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body class="container-fluid">
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-4">
+            <h1>Conversion de devises</h1>
+            <form method="POST">
+                <div class="form-group">
+                    <input type="number" id="euroAmount" placeholder="Montant en euro" class="form-control">
+                </div>
+                <div class="form-group">
+                    <select id="currencyChoice" class="form-control">
+                        <option value="">Choisissez une devise</option>
+                        <option value="USD">Dollars américains</option>
+                        <option value="CAD">Dollars canadiens</option>
+                        <option value="JPY">Yens japonais</option>
+                        <option value="CNY">Yuans chinois</option>
+                    </select>
+                </div>
+                <button type="submit">convertir</button>
+            </form>
+
+            <div id="results"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>
