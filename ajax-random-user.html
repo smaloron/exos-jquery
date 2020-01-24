@@ -82,6 +82,11 @@
                     $tbody.replaceWith($newTbody);
                 });
 
+                $.get("https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&facet=category&facet=tags&facet=address_zipcode&facet=address_city&facet=pmr&facet=blind&facet=deaf&facet=access_type&facet=price_type&rows=100",
+                    function(data) {
+                        console.log(data);
+                    });
+
             });
 
 
