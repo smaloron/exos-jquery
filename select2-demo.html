@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Démonstration du plugin Select2</title>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+    <script>
+        var cities = [{
+            id: "1",
+            text: "Besançon"
+        }, {
+            id: "2",
+            text: "Bézier"
+        }, {
+            id: "3",
+            text: "Paris"
+        }, {
+            id: "4",
+            text: "Palaiseau"
+        }];
+        $(document).ready(function() {
+            $("#currencyChoice").select2({
+                data: cities
+            });
+        })
+    </script>
+</head>
+
+<body>
+
+    <select id="currencyChoice" multiple style="width: 300px">
+        <option value="">Choisissez une devise</option>
+        <option value="USD">Dollars américains</option>
+        <option value="CAD">Dollars canadiens</option>
+        <option value="JPY">Yens japonais</option>
+        <option value="CNY">Yuans chinois</option>
+    </select>
+
+</body>
+
+</html>
