@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,39 +8,112 @@
     <title>Utilisateur aléatoire</title>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script>
-        
-        $(document).ready(function(){
+        $(document).ready(function() {
             var $infos = $("#infos");
 
             //Récupération des données d'un utilisateur aléatoire
             //depuis le serveur randomuser.me
-            const API_URL = "https://randomuser.me/api?gender=female&nat=es";
+            const API_URL = "https://randomuser.me/api?";
 
             var user;
 
-            //appel ajax
-            $.get(API_URL, function(response){
-                user = response.results[0];
+            //Définition des cibles de l'application
+            var $form = $("form");
+            var $nationality = $("#nationality");
 
-                $infos.children()
+            //capture de l'événement submit sur le formulaire
+            $form.submit(function(event) {
+                //Empêche l'envoi du formulaire
+                event.preventDefault();
+
+                //Récupération de la valeur de la case cochée
+                var gender = $(":checked").val();
+
+                //Récupération du choix de la nationalité
+                var nationality = $nationality.val();
+
+                //récupération du nombre d'utilisateurs demandé
+                var numberOfResults = $("#numberOfResults").val();
+
+                //var requestUrl = API_URL+ "gender=" + gender + "&nat=" + nationality;
+                var requestUrl = `${API_URL}gender=${gender}&nat=${nationality}&results=${numberOfResults}`;
+
+                //appel ajax
+                $.get(requestUrl, function(response) {
+                    console.log(response);
+                    user = response.results[0];
+
+                    $infos.children()
                         .first()
                         .text(user.name.first + " " + user.name.last)
                         .next()
                         .text(user.gender);
+                });
+
             });
+
+
 
             console.log("fin du script");
 
         });
-    
     </script>
 </head>
+
 <body>
+
+    <form method="POST">
+        <div>
+            <label>Genre :</label>
+            <input type="radio" value="female" id="radioFemale" name="gender" checked>
+            <label for="radioFemale">Féminin</label>
+            <input type="radio" value="male" id="radioMale" name="gender">
+            <label for="radioMale">Masculin</label>
+        </div>
+        <div>
+            <label for="nationality">Nationalité</label>
+            <select id="nationality">
+                <option value="FR">Française</option>
+                <option value="DK">Danoise</option>
+                <option value="DE">Allemande</option>
+                <option value="IE">Irlandaise</option>
+                <option value="ES">Espagnole</option>
+            </select>
+        </div>
+        <div>
+            <label for="numberOfResults">Nombre de personnes</label>
+            <select id="numberOfResults">
+                <option>10</option>
+                <option>20</option>
+                <option>30</option>
+                <option>40</option>
+                <option>50</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Valider</button>
+        </div>
+    </form>
 
     <div id="infos">
         <h1></h1>
         <p></p>
     </div>
-    
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>email</th>
+                <th>tel</th>
+                <th>adresse</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
 </body>
+
 </html>
