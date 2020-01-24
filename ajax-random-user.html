@@ -48,6 +48,38 @@
                         .text(user.name.first + " " + user.name.last)
                         .next()
                         .text(user.gender);
+
+                    //boucle sur le résultat
+                    var $tbody = $("tbody");
+                    var $template = $("#rowTemplate");
+
+                    //Nouveau tbody qui remplacera l'ancien
+                    var $newTbody = $("<tbody></tbody>");
+                    $newTbody.append($template);
+
+                    for (currentUser of response.results) {
+                        //clone du modèle
+                        var $row = $template.clone().removeAttr("id");
+                        //remplissage du clone avec les données
+                        $row.children()
+                            .first().text(currentUser.name.first + " " + currentUser.name.last)
+                            .next().text(currentUser.email)
+                            .next().text(currentUser.phone)
+                            .next().text(
+                                currentUser.location.street.number + " " +
+                                currentUser.location.street.name + " " +
+                                currentUser.location.postcode + " " +
+                                currentUser.location.city
+                            );
+
+                        //console.log($row);
+
+                        //insertion de la nouvelle ligne dans le nouveau tbody
+                        $newTbody.append($row);
+                    }
+
+                    //remplacement de l'ancien tbody par le nouveau
+                    $tbody.replaceWith($newTbody);
                 });
 
             });
@@ -58,6 +90,12 @@
 
         });
     </script>
+
+    <style>
+        #rowTemplate {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -100,6 +138,8 @@
         <p></p>
     </div>
 
+
+
     <table>
         <thead>
             <tr>
@@ -110,6 +150,12 @@
             </tr>
         </thead>
         <tbody>
+            <tr id="rowTemplate">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
 
         </tbody>
     </table>
